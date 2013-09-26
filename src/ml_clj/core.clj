@@ -1,6 +1,5 @@
 (ns ml-clj.core
-  (:gen-class)
-  (:use [ml-clj.knn]))
+  (:use [ml-clj.knn :only [kNN create-dataset]]))
 
 (defn -main [& args]
   (let [[groups labels] (create-dataset)]
