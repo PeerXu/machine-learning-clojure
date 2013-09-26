@@ -53,3 +53,13 @@
                                         (assoc sub-tree feat (create-tree (split-dataset dataset best-feat feat) sub-labels)))
                                       {}
                                       unique-feat-values)}))))
+
+(defn classify [input-tree, feat-labels, test-vec]
+  (let [top-feat (first (keys input-tree))
+        child-tree (get input-tree top-feat)
+        feat-index (.indexOf feat-labels top-feat)
+        key (get test-vec feat-index)
+        value-of-feat (get child-tree key)]
+    (if (instance? clojure.lang.PersistentArrayMap value-of-feat)
+      (classify value-of-feat feat-labels test-vec)
+      value-of-feat)))
